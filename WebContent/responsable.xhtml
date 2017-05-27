@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Liste des Laureats</title>
+	</h:head>
+	
+	<h:body>
+	
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="20%">
+			<p:graphicImage value="/images/logo.png" style="margin-top: 0%;margin-left: 0%;margin-right: 0%"/>
+			<p:graphicImage value="/images/ssluyI.png" style="margin-top: 0%;margin-left: 20%;margin-right: 0%"/>
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="300">
+			<p:accordionPanel>
+				<p:tab title="consulter">
+				</p:tab>
+				<p:tab title="modifier">
+				</p:tab>
+				<p:tab title="supprimer">
+				</p:tab>
+				<p:tab title="envoyer mail">
+				</p:tab>
+				<p:tab title="modifier compte">
+				</p:tab>
+				<p:tab title="auteurs">
+				</p:tab>
+			</p:accordionPanel>
+			<p:graphicImage value="/images/images.jpe" style="margin-top: 25%"/>
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			
+			<h:form id="form">
+			 
+			<!-- <p:growl id="msgs" showDetail="true"/>-->
+				<p:growl id="msgs" showDetail="true"/>
+			 
+    			<p:dataTable  id="laureats" var="laureat" value="#{serviceLaureat.laureats}" 
+    					 editable="true"
+    					 widgetVar="laureatTable"
+    					 rows="10"
+    					 paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                         rowsPerPageTemplate="5,15,15"
+                         selectionMode="single" 
+                         selection="#{serviceLaureat.selectedLaureat}" 
+                         rowKey="#{laureat.matricule}"
+                 		 emptyMessage="No Laureat found with given criteria" 
+                 		 filteredValue="#{serviceLaureat.filteredLaureats}">
+                         
+                          <f:facet name="header">
+       			 				liste des Laureats			
+        						<p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+        						<p:columnToggler datasource="laureats" trigger="toggler" />
+    					  </f:facet>
+    					  <f:facet name="header">
+           					 <p:outputPanel>
+               					 <h:outputText value="Search all fields:" />
+                				 <p:inputText id="globalFilter" onkeyup="PF('laureatTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+            				</p:outputPanel>
+        				  </f:facet>
+        	<f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage value="/images/excel.png" width="24"/>
+                <p:dataExporter type="xls" target="laureats" fileName="laureats" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage value="/images/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="laureats" fileName="laureats"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage value="/images/csv.png" width="24"/>
+                <p:dataExporter type="csv" target="laureats" fileName="laureats" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage value="/images/xml.png" width="24"/>
+                <p:dataExporter type="xml" target="laureats" fileName="laureats" />
+            </h:commandLink>
+        </f:facet>
+    			
+    				<p:ajax event="rowEdit" listener="#{serviceLaureat.onRowEdit}" update=":form:msgs" />
+      			 	<p:ajax event="rowEditCancel" listener="#{serviceLaureat.onRowCancel}" update=":form:msgs" />
+      			 	
+      			 	<p:column headerText="matricule" filterBy="#{laureat.matricule}" sortBy="#{laureat.matricule}" filterMatchMode="startsWith">
+   					 	<p:cellEditor>
+       					 	<f:facet name="output"><h:outputText value="#{laureat.matricule}" /></f:facet>
+       					 	<f:facet name="input"><p:inputText value="#{laureat.matricule}" style="width:100%"/></f:facet>
+       					 </p:cellEditor>
+    				 </p:column>
+      			 	
+    				<p:column headerText="nom" filterBy="#{laureat.nom}" sortBy="#{laureat.nom}" filterMatchMode="startsWith">
+    					<p:cellEditor>
+        					<f:facet name="output"> <h:outputText value="#{laureat.nom}" /></f:facet>
+        					<f:facet name="input"><p:inputText id="modelInput" value="#{laureat.nom}" style="width:100%"/></f:facet>
+        				</p:cellEditor>
+   					</p:column>
+ 
+    				<p:column headerText="prenom" filterBy="#{laureat.prenom}" sortBy="#{laureat.prenom}" filterMatchMode="startsWith">
+    					<p:cellEditor>
+       					<f:facet name="output"> <h:outputText value="#{laureat.prenom}" /></f:facet>
+       					<f:facet name="input"><p:inputText value="#{laureat.prenom}" style="width:100%"/></f:facet>
+       					</p:cellEditor>
+    				</p:column>
+ 
+    				 <p:column headerText="email" filterBy="#{laureat.email}" sortBy="#{laureat.email}" filterMatchMode="startsWith">
+    				 	  <p:cellEditor>
+      					 	 <f:facet name="output"><h:outputText value="#{laureat.email}" /></f:facet>
+      					 	 <f:facet name="input"><p:inputText value="#{laureat.email}" style="width:100%"/></f:facet>
+      					  </p:cellEditor>
+   		 			 </p:column>
+   		 			 <p:column headerText="filiere" filterBy="#{laureat.filiere}" sortBy="#{laureat.filiere}" filterMatchMode="startsWith">
+   		 			 	  <p:cellEditor>
+      					  	<f:facet name="output"><h:outputText value="#{laureat.filiere}" /></f:facet>
+      					  	<f:facet name="input"><p:inputText value="#{laureat.filiere}" style="width:100%"/></f:facet>
+      					  	
+      					  </p:cellEditor>
+   		 			 </p:column>
+   		 			 <p:column headerText="Faculte" filterBy="#{laureat.faculte}" sortBy="#{laureat.faculte}" filterMatchMode="startsWith">
+   		 			 	  <p:cellEditor>
+      					  	<f:facet name="output"><h:outputText value="#{laureat.faculte}" /></f:facet>
+      					  	<f:facet name="input"><p:inputText value="#{laureat.faculte}" style="width:100%"/></f:facet>
+      					  </p:cellEditor>
+   		 			 </p:column>
+   		 			 <p:column headerText="Numero" filterBy="#{laureat.numero}" sortBy="#{laureat.numero}" filterMatchMode="startsWith">
+   		 			 	  <p:cellEditor>
+      					  	<f:facet name="output"><h:outputText value="#{laureat.numero}" /></f:facet>
+      					  	<f:facet name="input"><p:inputText value="#{laureat.numero}" style="width:100%"/></f:facet>
+      					  </p:cellEditor>
+   		 			 </p:column>
+   		 			 
+   		 			 <p:column style="width:32px">
+           				<p:rowEditor />
+      				 </p:column>
+    			</p:dataTable>
+    			
+    			
+    	<p:dialog header="Laureat Info" widgetVar="laureatDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+       				<p:outputPanel id="laureatDetail" style="text-align:center;">
+            		<p:panelGrid  columns="2" rendered="#{not empty serviceLaureat.selectedLaureat}" columnClasses="label,value">
+                
+                <h:outputText value="nom :" />
+                <h:outputText value="#{serviceLaureat.selectedLaureat.nom}" />
+ 
+                <h:outputText value="prenom :" />
+                <h:outputText value="#{serviceLaureat.selectedLaureat.prenom}" />
+ 
+                <h:outputText value="matricule :" />
+                <h:outputText value="#{serviceLaureat.selectedLaureat.matricule}"/>
+ 
+                <h:outputText value="filiere :" />
+                <h:outputText value="#{serviceLaureat.selectedLaureat.filiere}" />
+                
+                <h:outputText value="faculte :" />
+                <h:outputText value="#{serviceLaureat.selectedLaureat.faculte}" />
+                
+                <h:outputText value="numero :" />
+                <h:outputText value="#{serviceLaureat.selectedLaureat.numero}" />
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+			</h:form>
+			
+		</p:layoutUnit>
+	</p:layout>
+	
+	
+	<h:form id="form1">
+		<p:menubar style="margin-top:7%;margin-left:0%">
+        <p:submenu label="File" icon="">
+            <p:submenu label="New" icon="">
+                <p:menuitem value="Project" url="#" />
+                <p:menuitem value="Other" url="#" />
+            </p:submenu>
+            <p:menuitem value="Open" url="#" />
+            <p:separator />
+            <p:menuitem value="Quit" url="#" />
+        </p:submenu>
+ 
+        <p:submenu label="Edit" icon="">
+            <p:menuitem value="Undo" url="#" icon="" />
+            <p:menuitem value="Redo" url="#" icon="" />
+        </p:submenu>
+ 
+        <p:submenu label="Help" icon="">
+            <p:menuitem value="Contents" url="#" />
+            <p:submenu label="Search" icon="">
+                <p:submenu label="Text">
+                    <p:menuitem value="Workspace" url="#" />
+                </p:submenu>
+                <p:menuitem value="File" url="#" />
+            </p:submenu>
+        </p:submenu>
+ 
+        <p:submenu label="Actions" icon="">
+            <p:submenu label="Ajax" icon="">
+                <p:menuitem value="Save"  icon="" />
+                <p:menuitem value="Update"  icon="" />
+            </p:submenu>
+            <p:submenu label="Non-Ajax" icon="ui-icon-newwin">
+                <p:menuitem value="Delete"  icon=""  ajax="false"/>
+            </p:submenu>
+        </p:submenu>
+ 
+        <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+ 
+        <f:facet name="options">
+            <p:inputText style="margin-right:10px" placeholder="Search"/>
+            <p:commandButton type="button" value="Logout" icon="" />
+        </f:facet>
+    	</p:menubar>
+   	 </h:form> 
+   	 
+   		<!-- <p:stack icon="/images/stack.png" expanded="false">
+    		<p:menuitem value="Home" icon="/images/home.png" url="#"/>
+    		<p:menuitem value="Email" icon="/images/email.png" url="#"/>
+    		<p:menuitem value="Portfolio" icon="/images/portfolio.png" url="#"/>
+			</p:stack>	 -->
+	</h:body>
+</html>

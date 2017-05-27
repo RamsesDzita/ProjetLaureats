@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Poster" table="poster">
+		<composite-id class="PosterPK" name="Id">
+		<meta attribute="sync-DAO">true</meta>
+			<key-many-to-one
+				class="Emploi"
+				column="idEmploi"
+				name="IdEmploi"
+			 />
+			<key-many-to-one
+				class="Internaute"
+				column="idInternaute"
+				name="IdInternaute"
+			 />
+		</composite-id>
+		<property
+			column="Heureposte"
+			length="8"
+			name="Heureposte"
+			not-null="true"
+			type="time"
+		 />
+		<property
+			column="dateposte"
+			length="10"
+			name="Dateposte"
+			not-null="true"
+			type="date"
+		 />
+	</class>
+</hibernate-mapping>

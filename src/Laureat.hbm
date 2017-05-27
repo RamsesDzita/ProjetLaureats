@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Laureat" table="laureat">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idLaureat"
+			name="IdLaureat"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<property
+			column="matricule"
+			length="50"
+			name="Matricule"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="diplomePrepare"
+			length="50"
+			name="DiplomePrepare"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="parcours"
+			length="50"
+			name="Parcours"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="optionChoisie"
+			length="50"
+			name="OptionChoisie"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="conseillerFormation"
+			length="10"
+			name="ConseillerFormation"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="objectifAvantForm"
+			length="50"
+			name="ObjectifAvantForm"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="raisonConseil"
+			name="RaisonConseil"
+			not-null="false"
+			type="string"
+		 />
+		<property
+			column="objectifAtteint"
+			length="50"
+			name="ObjectifAtteint"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="situationProAvant"
+			length="50"
+			name="SituationProAvant"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="commentaires"
+			name="Commentaires"
+			not-null="false"
+			type="string"
+		 />
+		<property
+			column="faculte"
+			length="50"
+			name="Faculte"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="typeFormation"
+			length="50"
+			name="TypeFormation"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="interet"
+			length="50"
+			name="Interet"
+			not-null="true"
+			type="string"
+		 />
+
+		<many-to-one
+			class="Personne"
+			name="IdPersonne"
+			not-null="true"
+		>
+			<column name="idPersonne" />
+		</many-to-one>
+		<set inverse="true" name="MessagemailSet">
+			<key column="idLaureat" />
+			<one-to-many class="Messagemail" />
+		</set>
+		<set inverse="true" name="CommentaireSet">
+			<key column="idLaureat" />
+			<one-to-many class="Commentaire" />
+		</set>
+		<set inverse="true" name="MessagelaureatSetByLaureatrecepteur">
+			<key column="laureatrecepteur" />
+			<one-to-many class="Messagelaureat" />
+		</set>
+		<set inverse="true" name="MessagelaureatSetByLaureatemetteur">
+			<key column="laureatemetteur" />
+			<one-to-many class="Messagelaureat" />
+		</set>
+		<set inverse="true" name="AmitieSetByAmitierecepteur">
+			<key column="amitierecepteur" />
+			<one-to-many class="Amitie" />
+		</set>
+		<set inverse="true" name="EvenementlaureatSet">
+			<key column="idLaureat" />
+			<one-to-many class="Evenementlaureat" />
+		</set>
+		<set inverse="true" name="AmitieSetByAmitieemetteur">
+			<key column="amitieemetteur" />
+			<one-to-many class="Amitie" />
+		</set>
+	</class>
+</hibernate-mapping>

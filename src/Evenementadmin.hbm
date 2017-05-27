@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Evenementadmin" table="evenementadmin">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idEvenementAdmin"
+			name="IdEvenementAdmin"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<property
+			column="lieuEvenement"
+			length="50"
+			name="LieuEvenement"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="domaine"
+			length="50"
+			name="Domaine"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="typeEvenement"
+			length="50"
+			name="TypeEvenement"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="heureEvenement"
+			length="8"
+			name="HeureEvenement"
+			not-null="true"
+			type="time"
+		 />
+		<property
+			column="dateEvenement"
+			length="10"
+			name="DateEvenement"
+			not-null="true"
+			type="date"
+		 />
+		<property
+			column="description"
+			name="Description"
+			not-null="true"
+			type="string"
+		 />
+
+		<many-to-one
+			class="Responsable"
+			name="IdResponsable"
+			not-null="true"
+		>
+			<column name="idResponsable" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Personne" table="personne">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idPersonne"
+			name="IdPersonne"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<property
+			column="motDePasse"
+			length="70"
+			name="MotDePasse"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="profil"
+			name="Profil"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="telephone"
+			length="20"
+			name="Telephone"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="login"
+			length="50"
+			name="Login"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="nom"
+			length="50"
+			name="Nom"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="prenom"
+			length="50"
+			name="Prenom"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="email"
+			length="50"
+			name="Email"
+			not-null="true"
+			type="string"
+		 />
+
+		<set inverse="true" name="LaureatSet">
+			<key column="idPersonne" />
+			<one-to-many class="Laureat" />
+		</set>
+		<set inverse="true" name="InternauteSet">
+			<key column="idPersonne" />
+			<one-to-many class="Internaute" />
+		</set>
+		<set inverse="true" name="ResponsableSet">
+			<key column="idPersonne" />
+			<one-to-many class="Responsable" />
+		</set>
+	</class>
+</hibernate-mapping>

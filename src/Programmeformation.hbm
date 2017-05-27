@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Programmeformation" table="programmeformation">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idProgrammeFormation"
+			name="IdProgrammeFormation"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<property
+			column="image"
+			name="Image"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="suggestion"
+			name="Suggestion"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="justificatif"
+			name="Justificatif"
+			not-null="true"
+			type="string"
+		 />
+
+		<many-to-one
+			class="Evenementlaureat"
+			name="IdEvenementLaureat"
+			not-null="true"
+		>
+			<column name="idEvenementLaureat" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Evenementlaureat" table="evenementlaureat">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idEvenementLaureat"
+			name="IdEvenementLaureat"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<property
+			column="nomEvenement"
+			length="50"
+			name="NomEvenement"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="heurePublication"
+			length="8"
+			name="HeurePublication"
+			not-null="true"
+			type="time"
+		 />
+		<property
+			column="datePublication"
+			length="10"
+			name="DatePublication"
+			not-null="true"
+			type="date"
+		 />
+		<property
+			column="description"
+			name="Description"
+			not-null="true"
+			type="string"
+		 />
+
+		<many-to-one
+			class="Laureat"
+			name="IdLaureat"
+			not-null="true"
+		>
+			<column name="idLaureat" />
+		</many-to-one>
+		<set inverse="true" name="EmploiSet">
+			<key column="idEvenementLaureat" />
+			<one-to-many class="Emploi" />
+		</set>
+		<set inverse="true" name="DonSet">
+			<key column="idEvenementLaureat" />
+			<one-to-many class="Don" />
+		</set>
+		<set inverse="true" name="ProgrammeformationSet">
+			<key column="idEvenementLaureat" />
+			<one-to-many class="Programmeformation" />
+		</set>
+		<set inverse="true" name="StageSet">
+			<key column="idEvenementLaureat" />
+			<one-to-many class="Stage" />
+		</set>
+	</class>
+</hibernate-mapping>

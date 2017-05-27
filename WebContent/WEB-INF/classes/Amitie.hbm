@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Amitie" table="amitie">
+	<meta attribute="sync-DAO">true</meta>
+		<composite-id class="AmitiePK" name="Id">
+			<key-many-to-one
+				class="Laureat"
+				column="amitierecepteur"
+				name="Amitierecepteur"
+			 />
+			<key-many-to-one
+				class="Laureat"
+				column="amitieemetteur"
+				name="Amitieemetteur"
+			 />
+		</composite-id>
+		<property
+			column="dateamitie"
+			length="10"
+			name="Dateamitie"
+			not-null="true"
+			type="date"
+		 />
+		<property
+			column="Heureamitie"
+			length="8"
+			name="Heureamitie"
+			not-null="true"
+			type="time"
+		 />
+	</class>
+</hibernate-mapping>

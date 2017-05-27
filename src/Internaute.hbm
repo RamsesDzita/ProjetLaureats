@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Internaute" table="internaute">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idInternaute"
+			name="IdInternaute"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<many-to-one
+			class="Personne"
+			name="IdPersonne"
+			not-null="true"
+		>
+			<column name="idPersonne" />
+		</many-to-one>
+		<set inverse="true" name="PosterSet">
+			<key column="idInternaute" />
+			<one-to-many class="Poster" />
+		</set>
+	</class>
+</hibernate-mapping>

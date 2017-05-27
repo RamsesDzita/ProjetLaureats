@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration
+    PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-2.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- local connection properties -->
+		<property name="hibernate.connection.url">
+			jdbc:mysql://localhost/laureat
+		</property>
+		<property name="hibernate.connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password" />
+		<!-- property name="hibernate.connection.pool_size"></property -->
+		<!-- dialect for MySQL -->
+		<property name="dialect">
+			net.sf.hibernate.dialect.MySQLDialect
+		</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.use_outer_join">true</property>
+		<property name="hibernate.transaction.factory_class">
+			net.sf.hibernate.transaction.JTATransactionFactory
+		</property>
+		<property name="jta.UserTransaction">
+			java:comp/UserTransaction
+		</property>
+		<!-- mapping files -->
+		<mapping resource="Amitie.hbm" />
+		<mapping resource="Commentaire.hbm" />
+		<mapping resource="Don.hbm" />
+		<mapping resource="Emploi.hbm" />
+		<mapping resource="Evenementadmin.hbm" />
+		<mapping resource="Evenementlaureat.hbm" />
+		<mapping resource="Internaute.hbm" />
+		<mapping resource="Laureat.hbm" />
+		<mapping resource="Messagelaureat.hbm" />
+		<mapping resource="Messagemail.hbm" />
+		<mapping resource="Personne.hbm" />
+		<mapping resource="Poster.hbm" />
+		<mapping resource="Programmeformation.hbm" />
+		<mapping resource="Responsable.hbm" />
+		<mapping resource="Stage.hbm" />
+	</session-factory>
+</hibernate-configuration>

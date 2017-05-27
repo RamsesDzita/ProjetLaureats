@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Emploi" table="emploi">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idEmploi"
+			name="IdEmploi"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<property
+			column="image"
+			name="Image"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="descriptionEmploi"
+			name="DescriptionEmploi"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="domaineEmploi"
+			length="50"
+			name="DomaineEmploi"
+			not-null="true"
+			type="string"
+		 />
+
+		<many-to-one
+			class="Evenementlaureat"
+			name="IdEvenementLaureat"
+			not-null="true"
+		>
+			<column name="idEvenementLaureat" />
+		</many-to-one>
+		<set inverse="true" name="PosterSet">
+			<key column="idEmploi" />
+			<one-to-many class="Poster" />
+		</set>
+	</class>
+</hibernate-mapping>

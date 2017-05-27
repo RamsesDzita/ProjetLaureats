@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Responsable" table="responsable">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idResponsable"
+			name="IdResponsable"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<property
+			column="typeResponsabilite"
+			length="50"
+			name="TypeResponsabilite"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="structure"
+			length="50"
+			name="Structure"
+			not-null="true"
+			type="string"
+		 />
+
+		<many-to-one
+			class="Personne"
+			name="IdPersonne"
+			not-null="true"
+		>
+			<column name="idPersonne" />
+		</many-to-one>
+		<set inverse="true" name="EvenementadminSet">
+			<key column="idResponsable" />
+			<one-to-many class="Evenementadmin" />
+		</set>
+		<set inverse="true" name="MessagemailSet">
+			<key column="idResponsable" />
+			<one-to-many class="Messagemail" />
+		</set>
+	</class>
+</hibernate-mapping>

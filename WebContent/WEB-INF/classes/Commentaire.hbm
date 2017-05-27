@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Commentaire" table="commentaire">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idCommentaire"
+			name="IdCommentaire"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<property
+			column="date"
+			length="10"
+			name="Date"
+			not-null="true"
+			type="date"
+		 />
+		<property
+			column="heure"
+			length="8"
+			name="Heure"
+			not-null="true"
+			type="time"
+		 />
+		<property
+			column="idProgrammeFormation"
+			length="10"
+			name="IdProgrammeFormation"
+			not-null="true"
+			type="integer"
+		 />
+		<property
+			column="texte"
+			name="Texte"
+			not-null="true"
+			type="string"
+		 />
+
+		<many-to-one
+			class="Laureat"
+			name="IdLaureat"
+			not-null="true"
+		>
+			<column name="idLaureat" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Don" table="don">
+	<meta attribute="sync-DAO">true</meta>
+		<id
+			column="idDon"
+			name="IdDon"
+			type="integer"
+		>
+			<generator class="native" />
+		</id>
+		<property
+			column="image"
+			name="Image"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="typeDon"
+			length="50"
+			name="TypeDon"
+			not-null="true"
+			type="string"
+		 />
+		<property
+			column="quantite"
+			length="10"
+			name="Quantite"
+			not-null="true"
+			type="integer"
+		 />
+
+		<many-to-one
+			class="Evenementlaureat"
+			name="IdEvenementLaureat"
+			not-null="true"
+		>
+			<column name="idEvenementLaureat" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

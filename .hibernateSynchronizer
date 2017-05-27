@@ -1,0 +1,5 @@
+package=model
+databaseUrl=jdbc:mysql://localhost/laureat
+driver=com.mysql.jdbc.Driver
+ConfigurationFile=ZLaureatsrchibernate.cfg.xml
+username=root

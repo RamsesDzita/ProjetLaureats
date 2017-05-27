@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr"
+			xmlns="http://www.w3.org/1999/xhtml"
+			xmlns:f="http://java.sun.com/jsf/core"
+			xmlns:h="http://java.sun.com/jsf/html"
+			xmlns:ui="http://java.sun.com/jsf/facelets"
+			xmlns:p="http://primefaces.org/ui">
+		<h:head>
+			<title>Acceuil</title>
+		</h:head>
+		<h:body>
+		<p:graphicImage value="/images/logo.png" style="margin-top: 15%;margin-left: 44%;margin-right: 40%"/>
+			<h:form>
+			<p:panel id="pnl" header="Connexion" style="margin-top: 1%;margin-left: 30%;margin-right: 30%">
+				<table>
+					<tr>
+						<p id="message"><p:messages for="message" showDetail="true" autoUpdate="true" closable="true"/></p>
+					</tr>
+					
+					<tr>
+						<td><p:outputLabel for="login" value="login :"/> </td>
+						<td><p:autoComplete id="login" value="#{connexion.resp}" completeMethod="#{connexion.methodeList}" placeholder="ex : Doyen"/></td>
+					</tr>
+					<tr>
+						<td><p:outputLabel for="structure" value="structure :"/> </td>
+						<td><p:selectOneMenu id="structure" value="#{connexion.responsabilite}">
+            						<f:selectItem itemLabel="select one" itemValue="" />
+            						<f:selectItems value="#{connexion.responsabilites}" />
+        					</p:selectOneMenu>
+        				</td>
+					</tr>
+					<tr>
+						<td><p:outputLabel for="password" value="password :"/></td>
+						<td><p:password id="password" value="#{connexion.motDePasse}"/></td>
+					</tr>
+					<tr>
+						<td><p></p></td>
+						<td><p:commandButton value="connexion"  action="#{connexion.mamethod}" /></td>
+					</tr>
+					<tr>
+						<td><p></p></td>
+						<td><a href="inscription.xhtml" style="color:#3366cc">mot de passe oublié ?</a></td>
+						<td></td>
+					</tr>
+				
+				</table>			
+			</p:panel>
+			</h:form>	
+		</h:body>
+</html>

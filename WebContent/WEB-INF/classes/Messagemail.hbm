@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="model">
+	<class name="Messagemail" table="messagemail">
+	<meta attribute="sync-DAO">true</meta>
+		<composite-id class="MessagemailPK" name="Id">
+			<key-many-to-one
+				class="Responsable"
+				column="idResponsable"
+				name="IdResponsable"
+			 />
+			<key-many-to-one
+				class="Laureat"
+				column="idLaureat"
+				name="IdLaureat"
+			 />
+		</composite-id>
+		<property
+			column="Heureenvoie"
+			length="8"
+			name="Heureenvoie"
+			not-null="true"
+			type="time"
+		 />
+		<property
+			column="dateenvoie"
+			length="10"
+			name="Dateenvoie"
+			not-null="true"
+			type="date"
+		 />
+		<property
+			column="texte"
+			name="Texte"
+			not-null="true"
+			type="string"
+		 />
+	</class>
+</hibernate-mapping>
